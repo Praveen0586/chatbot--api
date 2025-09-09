@@ -34,7 +34,7 @@ app.post('/chat', async (req, res) => {
     const completion = await openai.chat.completions.create({
       model: 'openai/gpt-4o',
       messages,
-      max_tokens: 3900,
+      max_tokens: 3700,
     });
 
     res.json(completion.choices[0].message);
