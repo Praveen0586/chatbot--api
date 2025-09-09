@@ -2,7 +2,7 @@
   "name": "oepn-ai",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "module",
+ // "type": "module",
   "scripts": {
     "live": "node index.js",
     "dev": "nodemon index.js",
