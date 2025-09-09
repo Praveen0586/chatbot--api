@@ -9,7 +9,7 @@ const openai = new OpenAI({
   baseURL: 'https://openrouter.ai/api/v1',
   apiKey: process.env.OPENROUTER_API_KEY,
   defaultHeaders: {
-    'HTTP-Referer': 'https://yourdomain.com', // replace with your actual domain or 'http://localhost' for development
+    'HTTP-Referer': 'https://yourdomain.com', // replace with your domain or localhost for development
     'X-Title': 'Eco Systems',
   },
 });
@@ -47,8 +47,9 @@ app.post('/app', (req, res) => {
 app.get('/health', (req, res) => {
   res.send('Server is healthy');
 });
+
 async function checkHealth() {
-  const url = 'https://chatbot-api-x0oa.onrender.com/health';
+  const url = 'https://chatbot-api-x0oa.onrender.com/health'; // your health check endpoint
 
   try {
     const response = await axios.get(url);
@@ -66,7 +67,7 @@ async function checkHealth() {
   }
 }
 
-// Initial check once
+// Initial health check once
 checkHealth();
 
 // Recurring health check every 8 seconds
