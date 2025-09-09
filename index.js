@@ -49,7 +49,7 @@ app.get('/health', (req, res) => {
 });
 
 async function checkHealth() {
-  const url = 'https://chatbot-api-x0oa.onrender.com/health'; // your health check endpoint
+  const url = 'https://chatbot-api-mlda.onrender.com/health'; // your health check endpoint
 
   try {
     const response = await axios.get(url);
