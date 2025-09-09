@@ -41,7 +41,9 @@ app.post('/chat', async (req, res) => {
 });
 
 app.post('/app', (req, res) => {
-  res.send('Hello World');
+  res.send('Hello World');console.log('Using OpenRouter API key:', Boolean(process.env.OPENROUTER_API_KEY));
+console.log('OpenRouter base URL:', 'https://openrouter.ai/api/v1');
+
   console.log('API key is loaded:', process.env.OPENROUTER_API_KEY ? 'YES' : 'NO');
 
 });
