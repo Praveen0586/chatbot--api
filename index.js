@@ -47,9 +47,8 @@ app.post('/app', (req, res) => {
 app.get('/health', (req, res) => {
   res.send('Server is healthy');
 });
-
 async function checkHealth() {
-  const url = 'https://chatbot-api-x0oa.onrender.com/health'; // your health check endpoint
+  const url = 'https://chatbot-api-x0oa.onrender.com/health';
 
   try {
     const response = await axios.get(url);
@@ -67,8 +66,13 @@ async function checkHealth() {
   }
 }
 
-// Example usage: run health check once on startup
+// Initial check once
 checkHealth();
+
+// Recurring health check every 8 seconds
+setInterval(() => {
+  checkHealth();
+}, 8000);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

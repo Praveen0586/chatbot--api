@@ -2,8 +2,9 @@
   "name": "oepn-ai",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "live":"node index.js",
+    "live": "node index.js",
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
