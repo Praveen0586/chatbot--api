@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import OpenAI from 'openai';
+import axios from 'axios';
 
 dotenv.config();
 
@@ -42,6 +43,32 @@ app.post('/chat', async (req, res) => {
 app.post('/app', (req, res) => {
     res.send('Hello World');
 });
+
+app.get("?health", (req, res) => {
+    res.send("Server is healthy");
+})
+async function checkHealth() {
+    const url = 'https://chatbot-api-x0oa.onrender.com/health'; // your health check endpoint
+
+    try {
+        const response = await axios.get(url);
+
+        if (response.status === 200) {
+            console.log('Health check successful:', response.data);
+            return true;
+        } else {
+            console.log('Health check failed with status:', response.status);
+            return false;
+        }
+    } catch (error) {
+        console.error('Health check error:', error.message);
+        return false;
+    }
+}
+
+// Example usage
+checkHealth();
+
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
