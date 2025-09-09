@@ -42,6 +42,8 @@ app.post('/chat', async (req, res) => {
 
 app.post('/app', (req, res) => {
   res.send('Hello World');
+  console.log('API key is loaded:', process.env.OPENROUTER_API_KEY ? 'YES' : 'NO');
+
 });
 
 app.get('/health', (req, res) => {
