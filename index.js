@@ -5,6 +5,10 @@ import axios from 'axios';
 
 dotenv.config();
 
+console.log('Using OpenRouter API key:', Boolean(process.env.OPENROUTER_API_KEY));
+console.log('OpenRouter base URL:', 'https://openrouter.ai/api/v1');
+console.log('API key is loaded:', process.env.OPENROUTER_API_KEY ? 'YES' : 'NO');
+
 const openai = new OpenAI({
   baseURL: 'https://openrouter.ai/api/v1',
   apiKey: process.env.OPENROUTER_API_KEY,
@@ -30,22 +34,18 @@ app.post('/chat', async (req, res) => {
     const completion = await openai.chat.completions.create({
       model: 'openai/gpt-4o',
       messages,
-      max_tokens: 3900, // limit tokens to your current plan's allowance
+      max_tokens: 3900,
     });
 
     res.json(completion.choices[0].message);
   } catch (error) {
-    console.error(error);
+    console.error('OpenRouter API error:', error);
     res.status(500).json({ error: 'Failed to get response from OpenRouter API' });
   }
 });
 
 app.post('/app', (req, res) => {
-  res.send('Hello World');console.log('Using OpenRouter API key:', Boolean(process.env.OPENROUTER_API_KEY));
-console.log('OpenRouter base URL:', 'https://openrouter.ai/api/v1');
-
-  console.log('API key is loaded:', process.env.OPENROUTER_API_KEY ? 'YES' : 'NO');
-
+  res.send('Hello World');
 });
 
 app.get('/health', (req, res) => {
@@ -53,7 +53,7 @@ app.get('/health', (req, res) => {
 });
 
 async function checkHealth() {
-  const url = 'https://chatbot-api-mlda.onrender.com/health'; // your health check endpoint
+  const url = 'https://chatbot-api-mlda.onrender.com/health';
 
   try {
     const response = await axios.get(url);
@@ -71,10 +71,8 @@ async function checkHealth() {
   }
 }
 
-// Initial health check once
 checkHealth();
 
-// Recurring health check every 8 seconds
 setInterval(() => {
   checkHealth();
 }, 8000);
